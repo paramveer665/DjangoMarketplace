@@ -1,0 +1,15 @@
+{% extends "base.html" %} {% block content %} {% if is_Loggedin %}
+<p>You are already logged in do you want to <a href="/logout">logout</a>?</p>
+{%else%}
+
+<form action="." method="POST">
+  {%csrf_token%}
+  <div style="margin: 30px">
+    {{form.as_p}}
+
+    <button type="submit">Login</button>
+  </div>
+</form>
+
+<p>Do you want to <a href="/register"> register</a>?</p>
+{% endif %} {% endblock content %}

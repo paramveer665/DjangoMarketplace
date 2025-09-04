@@ -1,0 +1,25 @@
+{% extends "base.html" %} {% block content%}
+<ul style="list-style: none; display: flex; flex-wrap: wrap">
+  <li style="border: solid 1px; margin: 2px; padding: 4px; width: 350px">
+    {% comment %}
+    <form action="/products" method="POST">
+      {% if not loggedIn %}
+
+      <div style="color: red">{{error}}</div>
+      {% endif %} {% csrf_token %}
+      <button type="submit">Add product</button>
+    </form>
+    {% endcomment %}
+
+    <a href="/create">Create a product</a>
+  </li>
+  {% for p in products %}
+  <li style="border: solid 1px; margin: 2px; padding: 4px; width: 350px">
+    <span>Product Name: </span>{{p.title}}
+    <div>Description:<span>{{p.desc}}</span></div>
+    <div>Price:<span>{{p.price}}</span></div>
+    <a href="/product/{{p.id}}"><span>Open Product</span></a>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

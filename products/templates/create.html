@@ -1,0 +1,14 @@
+{% extends "base.html" %} {% block content %} {% if not created %}
+<h1>Create Element</h1>
+
+<form action="." method="POST">
+  {%csrf_token%} {{form.as_p}}
+
+  <button type="submit">Add Product</button>
+</form>
+{% else %}
+<p>Your new product has been added</p>
+<a href="/product/{{object.id}}"
+  ><span>{{object.title}} - {{object.desc}} </span></a
+>
+{% endif %} {% endblock content %}

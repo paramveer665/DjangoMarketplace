@@ -1,0 +1,9 @@
+{% extends "base.html" %} {% block content %} {% if isLoggedIn %}
+<p>You are already registered</p>
+{% else %}
+<form action="." method="post">
+  {% csrf_token %} {{form.as_p}}
+  <button type="submit">Register</button>
+</form>
+
+{% endif %} {%endblock%}
