@@ -17,5 +17,5 @@ jobs:
         run: |
           echo "$SSH_KEY" > ec2_key.pem
           chmod 400 ec2_key.pem
-          scp -i ec2_key.pem -o StrictHostKeyChecking=no deploy_script.sh paramveer665@ec2-3-111-219-92.ap-south-1.compute.amazonaws.com:deploy_script.sh
-          ssh -i ec2_key.pem -o StrictHostKeyChecking=no paramveer665@ec2-3-111-219-92.ap-south-1.compute.amazonaws.com 'bash DjangoMarketplace/deploy_script.sh'
+          scp -i ec2_key.pem -o StrictHostKeyChecking=no DjangoMarketplace/deploy_script.sh ubuntu@3.111.219.92:DjangoMarketplace/deploy_script.sh
+          ssh -i ec2_key.pem -o StrictHostKeyChecking=no ubuntu@3.111.219.92 'bash DjangoMarketplace/deploy_script.sh'
