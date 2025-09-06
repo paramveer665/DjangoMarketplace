@@ -17,5 +17,5 @@ jobs:
         run: |
           echo "$SSH_KEY" > ec2_key.pem
           chmod 400 ec2_key.pem
-          scp -i ec2_key.pem -o StrictHostKeyChecking=no deploy_script.sh ec2-user@3.111.219.92:deploy_script.sh
-          ssh -i ec2_key.pem -o StrictHostKeyChecking=no ec2-user@3.111.219.92 'bash deploy_script.sh'
+          scp -i ec2_key.pem -o StrictHostKeyChecking=no deploy_script.sh ec2-user@ec2-3-111-219-92.ap-south-1.compute.amazonaws.com:deploy_script.sh
+          ssh -i ec2_key.pem -o StrictHostKeyChecking=no ec2-user@ec2-3-111-219-92.ap-south-1.compute.amazonaws.com 'bash deploy_script.sh'
