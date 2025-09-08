@@ -1,25 +1,76 @@
 {% extends "base.html" %} {% block content%}
-<ul style="list-style: none; display: flex; flex-wrap: wrap">
-  <li style="border: solid 1px; margin: 2px; padding: 4px; width: 350px">
-    {% comment %}
-    <form action="/products" method="POST">
-      {% if not loggedIn %}
-
-      <div style="color: red">{{error}}</div>
-      {% endif %} {% csrf_token %}
-      <button type="submit">Add product</button>
-    </form>
-    {% endcomment %}
-
-    <a href="/create">Create a product</a>
-  </li>
+<style>
+  .products-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  .product-card {
+    background-color: #1f1f1f;
+    border-radius: 5px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: #e0e0e0;
+    transition: transform 0.3s;
+  }
+  .product-card:hover {
+    transform: translateY(-5px);
+  }
+  .product-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .product-description {
+    margin-bottom: 1rem;
+  }
+  .product-price {
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+  }
+  .product-link {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background-color: #264653;
+    color: #e0e0e0;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  .product-link:hover {
+    background-color: #2a9d8f;
+  }
+  .create-product-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1f1f1f;
+    border-radius: 5px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: #e0e0e0;
+    transition: transform 0.3s;
+    min-height: 200px;
+  }
+  .create-product-card:hover {
+    transform: translateY(-5px);
+  }
+  .create-product-link {
+    font-size: 1.5rem;
+    color: #2a9d8f;
+    text-decoration: none;
+  }
+</style>
+<div class="products-container">
+  <a href="/create" class="create-product-card">
+    <div class="create-product-link">+ Create a new product</div>
+  </a>
   {% for p in products %}
-  <li style="border: solid 1px; margin: 2px; padding: 4px; width: 350px">
-    <span>Product Name: </span>{{p.title}}
-    <div>Description:<span>{{p.desc}}</span></div>
-    <div>Price:<span>{{p.price}}</span></div>
-    <a href="/product/{{p.id}}"><span>Open Product</span></a>
-  </li>
+  <div class="product-card">
+    <h2 class="product-title">{{p.title}}</h2>
+    <p class="product-description">{{p.desc}}</p>
+    <div class="product-price">Price: ${{p.price}}</div>
+    <a href="/product/{{p.id}}" class="product-link">View Details</a>
+  </div>
   {% endfor %}
-</ul>
+</div>
 {% endblock %}

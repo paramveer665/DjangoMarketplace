@@ -4,34 +4,80 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Learn Django</title>
+    <style>
+      body {
+        background-color: #121212;
+        color: #e0e0e0;
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        background-color: #1f1f1f;
+      }
+      nav a {
+        color: #e0e0e0;
+        text-decoration: none;
+        font-size: 1.2rem;
+      }
+      nav a:hover {
+        color: #2a9d8f;
+      }
+      .search-form {
+        display: flex;
+        margin-bottom: 2rem;
+      }
+      .search-form input[type="text"] {
+        flex-grow: 1;
+        padding: 0.8rem;
+        border: 1px solid #333;
+        border-radius: 5px 0 0 5px;
+        background-color: #1f1f1f;
+        color: #e0e0e0;
+      }
+      .search-form input[type="submit"] {
+        padding: 0.8rem 1.5rem;
+        border: none;
+        border-radius: 0 5px 5px 0;
+        background-color: #264653;
+        color: #e0e0e0;
+        cursor: pointer;
+      }
+      .search-form input[type="submit"]:hover {
+        background-color: #2a9d8f;
+      }
+      .content {
+        padding: 2rem 0;
+      }
+    </style>
   </head>
   <body>
     <nav>
-      <ul
-        style="
-          display: flex;
-          list-style: none;
-          font-size: 30px;
-          justify-content: space-between;
-        "
-      >
-        <a href="/" style="color: black; text-decoration: none">
-          <li>Learning Django</li></a
-        >
-
+      <a href="/">Learning Django</a>
+      <div>
         {% if request.user.is_authenticated %}
-        <li><a href="/logout">Logout</a></li>
+        <a href="/create" style="margin-right: 1rem">Create Product</a>
+        <a href="/logout">Logout</a>
         {% else %}
-        <li>
-          <a style="text-decoration: none; color: green" href="/login">Login</a>
-        </li>
+        <a href="/login">Login</a>
         {% endif %}
-      </ul>
+      </div>
     </nav>
-    <form action="/search/">
-      <input type="text" name="q" />
-      <input type="submit" />
-    </form>
-    <hero> {% block content %} empty{% endblock content %} </hero>
+    <div class="container">
+      <form action="/search/" class="search-form">
+        <input type="text" name="q" placeholder="Search products..." />
+        <input type="submit" value="Search" />
+      </form>
+      <main class="content">{% block content %} {% endblock content %}</main>
+    </div>
   </body>
 </html>

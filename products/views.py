@@ -5,59 +5,39 @@ from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
 from .forms import ProductForm
 
-product=Products.objects.all()
-
 
 # Create your views here.
 def products_view(request,*args,**kwargs):
+    product=Products.objects.all()
     context={
         "products":product
         
         }
-   
-    
-            
-            
-           
     return render(request,"products.html",context)
 
 
 def product_view(request,id=None):
+    product = None
     if id is not None:
-        obj=Products.objects.get(id=id)
+        product=Products.objects.get(id=id)
     
-    return render(request,"details.html",{"context":obj})
+    return render(request,"details.html",{"product":product})
 
 def search_view(request):
-    
-    result=request.GET.get("q")
-    
-    search_object=None
-    if result is not None:
-        search_object=Products.objects.get(id=result)   
-   
-
-
-    context={"res":search_object}
-   
+    query = request.GET.get("q")
+    products = None
+    if query is not None:
+        products = Products.objects.filter(title__icontains=query)
+    context={"products":products, "query": query}
     return render(request,'search.html',context)
 
 @login_required
 def create_view(request):
-    form=ProductForm()
-    context={"form":form}    
-    
     form=ProductForm(request.POST or None)
-    context["form"]=form
+    context={"form":form}
     if form.is_valid():
-        new_object=form.save()
-            # title=form.cleaned_data.get("title")
-            # desc=form.cleaned_data.get("desc")
-            # price=form.cleaned_data.POST.get("price")
-            # featured=True if request.POST.get("featured")=='on' else False
-            # active=True if request.POST.get("active")=='on' else False
-            # new_object=Products.objects.create(title=title,price=price,desc=desc,active=active,featured=featured)
-        context['object']=new_object
+        obj=form.save()
+        context['object']=obj
         context['created']=True
 
     return render(request,"create.html",context=context)

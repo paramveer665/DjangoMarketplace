@@ -1,3 +1,41 @@
-{% extends "base.html" %} {% block content %}
-<div>{{context.title}} is priced at{{context.price}}</div>
+{% extends "base.html" %} 
+{% block content %}
+<style>
+    .details-container {
+        background-color: #1f1f1f;
+        border-radius: 5px;
+        padding: 2rem;
+    }
+    .details-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+    .details-description {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+    }
+    .details-price {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 2rem;
+    }
+    .back-link {
+        display: inline-block;
+        padding: 0.8rem 1.5rem;
+        background-color: #264653;
+        color: #e0e0e0;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    .back-link:hover {
+        background-color: #2A9D8F;
+    }
+</style>
+<div class="details-container">
+    <h1 class="details-title">{{ product.title }}</h1>
+    <p class="details-description">{{ product.desc }}</p>
+    <div class="details-price">Price: ${{ product.price }}</div>
+    <a href="/products" class="back-link">Back to Products</a>
+</div>
 {% endblock content %}

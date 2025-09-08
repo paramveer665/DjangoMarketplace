@@ -1,15 +1,49 @@
-{% extends "base.html" %} {% block content %} {% if error%}
-<p style="color: red">{{error}}</p>
-
-{% endif %}
-<form action="." method="POST">
-  {%csrf_token%}
-  <div style="maring: 30px">
-    <div>
-      <label for=""> Are you sure you want to logout?"" </label>
-    </div>
-
-    <button type="submit">Logout</button>
-  </div>
-</form>
+{% extends "base.html" %} 
+{% block content %}
+<style>
+    .logout-container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: #1f1f1f;
+        border-radius: 5px;
+        text-align: center;
+    }
+    .logout-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+    .confirm-btn {
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 5px;
+        background-color: #c9302c;
+        color: #e0e0e0;
+        cursor: pointer;
+        font-size: 1.2rem;
+        transition: background-color 0.3s;
+    }
+    .confirm-btn:hover {
+        background-color: #ac2925;
+    }
+    .cancel-link {
+        display: inline-block;
+        margin-top: 1rem;
+        color: #2A9D8F;
+        text-decoration: none;
+    }
+</style>
+<div class="logout-container">
+    {% if request.user.is_authenticated %}
+        <h1 class="logout-title">Logout</h1>
+        <p>Are you sure you want to logout?</p>
+        <form action="." method="POST">
+            {% csrf_token %}
+            <button type="submit" class="confirm-btn">Yes, Logout</button>
+        </form>
+        <a href="/" class="cancel-link">Cancel</a>
+    {% else %}
+        <p>You are not logged in.</p>
+    {% endif %}
+</div>
 {% endblock content %}
