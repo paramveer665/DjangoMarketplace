@@ -22,12 +22,12 @@ from products.views import products_view,product_view,search_view,create_view
 from accounts.views import login_view,logout_view,register_view
 
 urlpatterns = [
-    path('',home_view),
+    path('',home_view,name='home'),
     path('admin/', admin.site.urls),
-    path('about/',about_view),
-    path('create/',create_view),
+    path('about/',about_view,name="about"),
+    path('create/',create_view,name="create"),
     path('home/',home_view),
-    path('login/',login_view),
+    path('login/',login_view,name="login"),
     path('logout/',logout_view),    
     path('products',products_view),
     path('search/',search_view),    
