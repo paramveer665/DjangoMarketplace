@@ -15,9 +15,9 @@ class TestingTest(TestCase):
 
     def test_user_login_failed(self):
         response=self.client.post(reverse('login'),{'username':'heisenberg','password':'heisenberg'})
-        # self.assertTemplateUsed(response, 'home')
+        
         self.assertContains(response,"Please enter a correct username and password.")
-        # print(reverse('/'))
+       
 
     def test_login_success(self):
         response=self.client.post(reverse('login'),{'username':'walter','password':'white'})
