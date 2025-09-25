@@ -1,0 +1,13 @@
+{% extends "base.html" %} {% block content%} {{blogs}}
+<ul>
+  <li><a href="create">Create a blog</a></li>
+  <li><a href="myblogs">My Blogs</a></li>
+  {% for b in blog %}
+  <li>
+    <div>Blog Title: {{b.blogtitle}}</div>
+    <div>{{b.content}}</div>
+    <div>Penned by: {{b.author}}</div>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock content%}
