@@ -1,22 +1,30 @@
-<!DOCTYPE html>
 {% extends "base.html" %}
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My blogs</title>
-  </head>
 
-  <body>
-    {% block content %} Blogs posted by me
-    <ul>
-      {% for b in blogs %}
-      <li>{{b.blogtitle}}</li>
-      <div>{{b.content}}</div>
-      <div>Penned by: {{b.author}}</div>
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>My Blogs</h1>
+        <a href="{% url 'blogs' %}" class="btn btn-secondary">All Blogs</a>
+    </div>
 
-      {% endfor %}
-    </ul>
-    {% endblock content %}
-  </body>
-</html>
+    <div class="row">
+        {% for b in blogs %}
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ b.blogtitle }}</h5>
+                    <p class="card-text">{{ b.content|truncatewords:50 }}</p>
+                </div>
+                <div class="card-footer text-muted">
+                    <small>Published on: {{ b.publishedAt|date:"F d, Y" }}</small>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col">
+            <p>You haven't posted any blogs yet.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
