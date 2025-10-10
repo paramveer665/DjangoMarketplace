@@ -5,7 +5,8 @@ set -e # Exit immediately if a command exits with a non-zero status.
 cd /home/ubuntu/DjangoMarketplace
 
 # Pull the latest changes from the main branch
-git pull origin main
+git fetch origin
+git reset --hard origin/main
 
 # Activate virtual environment
 source venv/bin/activate
