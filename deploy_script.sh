@@ -19,7 +19,6 @@ python3 manage.py migrate
 
 # Collect static files
 # This is a critical step for production
-python3 manage.py collectstatic --noinput
 
 # Deactivate the virtual environment
 deactivate
